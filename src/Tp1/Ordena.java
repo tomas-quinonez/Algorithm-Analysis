@@ -148,46 +148,65 @@ public class Ordena {
         }
     }
 
-    public static void bucketsort(int[] ar, final int minVal, final int maxVal) {
-        if (ar == null || ar.length == 0 || minVal == maxVal) {
-            return;
+    private static int[] obtenerValorMinMax(int[] arr) {
+        int[] aux = new int[2];
+        if (arr.length >= 2) {
+            aux[0] = arr[0];
+            aux[1] = arr[1];
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i] < aux[0]) {
+                    aux[0] = arr[i];
+                } else if (arr[i] > aux[1]) {
+                    aux[1] = arr[i];
+                }
+            }
+        } else {
+            aux[0] = arr[0];
+            aux[1] = arr[0];
         }
 
+        return aux;
+    }
+
+    public static void bucketsort(int[] ar) {
+        int[] valores = obtenerValorMinMax(ar);
+        int minVal = valores[0];
+        int maxVal = valores[1];
+
         // N is number elements and M is the range of values
-        final int N = ar.length, M = maxVal - minVal, NUM_BUCKETS = M / N + 1;
-        List<List<Integer>> buckets = new ArrayList<>(NUM_BUCKETS);
-        for (int i = 0; i < NUM_BUCKETS; i++) {
+        int n = ar.length;
+        int m = maxVal - minVal;
+        int cantBuckets = m / n + 1;
+        List<List<Integer>> buckets = new ArrayList<>(cantBuckets);
+        for (int i = 0; i < cantBuckets; i++) {
             buckets.add(new ArrayList<>());
         }
 
-        // Place each element in a bucket
-        for (int i = 0; i < N; i++) {
-            int bi = (ar[i] - minVal) / M;
+        // Ubicar cada elemento en un bucket
+        for (int i = 0; i < n; i++) {
+            int bi = (ar[i] - minVal) / m;
             List<Integer> bucket = buckets.get(bi);
             bucket.add(ar[i]);
         }
 
-        // Sort buckets and stitch together answer
-        for (int bi = 0, j = 0; bi < NUM_BUCKETS; bi++) {
+        // Ordenar los buckets y mezclarlos en un solo arreglo
+        for (int bi = 0, j = 0; bi < cantBuckets; bi++) {
             List<Integer> bucket = buckets.get(bi);
             if (bucket != null) {
+                Object[] lista = bucket.toArray();
                 Collections.sort(bucket);
+                //Object[] lista = bucket.toArray();
+                //quicksort(Arrays.stream(lista).mapToInt(o -> (int)o).toArray());
                 for (int k = 0; k < bucket.size(); k++) {
                     ar[j++] = bucket.get(k);
                 }
             }
         }
     }
-
+    
     public static void main(String[] args) {
         int[] arr = {3, 7, 9, 4, 0, 2, 5, 8};
-        //burbuja(arr);
-        //seleccion(arr);
-        //insercion(arr);
-        //burbujaMejorada(arr);
-        //quicksort(arr);
-        //mergesort(arr);
-        bucketsort(arr,0,9);
+        bucketsort(arr);
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
         }

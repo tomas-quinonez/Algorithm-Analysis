@@ -61,7 +61,7 @@ public class OrdenamientoTest {
         assertArrayEquals(comparable, ordenAleatorio);
     }
 
-    @Test
+    /*@Test
     public void testQuicksort() {
         int[] ordenAleatorio = RandomInts.leerArchivo();
         int[] creciente = ordenAleatorio.clone();
@@ -76,7 +76,7 @@ public class OrdenamientoTest {
         Ordena.quicksort(ordenAleatorio);
         assertArrayEquals(comparable, ordenAleatorio);
 
-    }
+    }*/
 
     @Test
     public void testInserccion() {
@@ -128,8 +128,19 @@ public class OrdenamientoTest {
     }
     
     @Test
-    public void testBucketSort(){
-        
+    public void testBucketsort(){
+        int[] ordenAleatorio = RandomInts.leerArchivo();
+        int[] creciente = ordenAleatorio.clone();
+        Ordena.burbujaMejorado(creciente);
+        int[] decreciente = invertido(creciente);
+        int[] comparable = creciente.clone();
+
+        Ordena.bucketsort(creciente);
+        assertArrayEquals(comparable, creciente);
+        Ordena.bucketsort(decreciente);
+        assertArrayEquals(comparable, decreciente);
+        Ordena.bucketsort(ordenAleatorio);
+        assertArrayEquals(comparable, ordenAleatorio);
     }
 
     @Test
