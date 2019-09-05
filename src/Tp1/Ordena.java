@@ -193,12 +193,14 @@ public class Ordena {
         for (int bi = 0, j = 0; bi < cantBuckets; bi++) {
             List<Integer> bucket = buckets.get(bi);
             if (bucket != null) {
+                //Collections.sort(bucket);
                 Object[] lista = bucket.toArray();
-                Collections.sort(bucket);
-                //Object[] lista = bucket.toArray();
-                //quicksort(Arrays.stream(lista).mapToInt(o -> (int)o).toArray());
-                for (int k = 0; k < bucket.size(); k++) {
-                    ar[j++] = bucket.get(k);
+                int[] listaInt = Arrays.stream(lista).mapToInt(o -> (int)o).toArray();
+                if(listaInt.length>1){
+                    quicksort(listaInt);
+                }
+                for (int k = 0; k < listaInt.length; k++) {
+                    ar[j++] = listaInt[k];
                 }
             }
         }

@@ -61,7 +61,7 @@ public class OrdenamientoTest {
         assertArrayEquals(comparable, ordenAleatorio);
     }
 
-    /*@Test
+    @Test
     public void testQuicksort() {
         int[] ordenAleatorio = RandomInts.leerArchivo();
         int[] creciente = ordenAleatorio.clone();
@@ -76,7 +76,7 @@ public class OrdenamientoTest {
         Ordena.quicksort(ordenAleatorio);
         assertArrayEquals(comparable, ordenAleatorio);
 
-    }*/
+    }
 
     @Test
     public void testInserccion() {
