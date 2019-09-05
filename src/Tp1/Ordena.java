@@ -1,5 +1,11 @@
 package Tp1;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Ordena {
 
     public static void burbuja(int[] a) {
@@ -95,10 +101,10 @@ public class Ordena {
         return j;
     }
 
-    public static void mergesort(int[] a){
-        mergesort(a,0,a.length-1);
+    public static void mergesort(int[] a) {
+        mergesort(a, 0, a.length - 1);
     }
-    
+
     private static void mergesort(int[] a, int izq, int der) {
         if (izq < der) {
             int m = (izq + der) / 2;
@@ -129,16 +135,47 @@ public class Ordena {
             A[k++] = B[i++];
         }
     }
-    
-    public static void heapsort(int[] a){
-        ArbolHeap arbolHeap=new ArbolHeap();
+
+    public static void heapsort(int[] a) {
+        ArbolHeap arbolHeap = new ArbolHeap();
         int i;
-        for(i=0;i<=a.length-1;i++){
+        for (i = 0; i <= a.length - 1; i++) {
             arbolHeap.insertar(a[i]);
         }
-        for(i=0;i<=a.length-1;i++){
-            a[i]=(int)arbolHeap.obtenerCima();
+        for (i = 0; i <= a.length - 1; i++) {
+            a[i] = (int) arbolHeap.obtenerCima();
             arbolHeap.eliminarCima();
+        }
+    }
+
+    public static void bucketsort(int[] ar, final int minVal, final int maxVal) {
+        if (ar == null || ar.length == 0 || minVal == maxVal) {
+            return;
+        }
+
+        // N is number elements and M is the range of values
+        final int N = ar.length, M = maxVal - minVal, NUM_BUCKETS = M / N + 1;
+        List<List<Integer>> buckets = new ArrayList<>(NUM_BUCKETS);
+        for (int i = 0; i < NUM_BUCKETS; i++) {
+            buckets.add(new ArrayList<>());
+        }
+
+        // Place each element in a bucket
+        for (int i = 0; i < N; i++) {
+            int bi = (ar[i] - minVal) / M;
+            List<Integer> bucket = buckets.get(bi);
+            bucket.add(ar[i]);
+        }
+
+        // Sort buckets and stitch together answer
+        for (int bi = 0, j = 0; bi < NUM_BUCKETS; bi++) {
+            List<Integer> bucket = buckets.get(bi);
+            if (bucket != null) {
+                Collections.sort(bucket);
+                for (int k = 0; k < bucket.size(); k++) {
+                    ar[j++] = bucket.get(k);
+                }
+            }
         }
     }
 
@@ -150,7 +187,7 @@ public class Ordena {
         //burbujaMejorada(arr);
         //quicksort(arr);
         //mergesort(arr);
-        heapsort(arr);
+        bucketsort(arr,0,9);
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
         }
