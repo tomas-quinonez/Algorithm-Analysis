@@ -167,15 +167,14 @@ public class Ordena {
 
         return aux;
     }
-
+    
     public static void bucketsort(int[] ar) {
         int[] valores = obtenerValorMinMax(ar);
         int minVal = valores[0];
         int maxVal = valores[1];
 
-        // N is number elements and M is the range of values
-        int n = ar.length;
-        int m = maxVal - minVal;
+        int n = ar.length; // n es el numero de elementos
+        int m = maxVal - minVal; // m es el rango de valores
         int cantBuckets = m / n + 1;
         List<List<Integer>> buckets = new ArrayList<>(cantBuckets);
         for (int i = 0; i < cantBuckets; i++) {
@@ -207,10 +206,13 @@ public class Ordena {
     }
     
     public static void main(String[] args) {
-        int[] arr = {3, 7, 9, 4, 0, 2, 5, 8};
+        int[] arr = {14,30,55,83,24,52,11};
+        int[] arr2 = {14,30,55,83,24,52,11};
         bucketsort(arr);
+        quicksort(arr2);
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
+            System.out.println(arr2[i]);
         }
     }
 }
