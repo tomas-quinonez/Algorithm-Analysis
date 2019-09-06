@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+//INTEGRANTES: APABLAZA FABIO - FAI-2039 Y TOMÁS QUIÑONEZ - FAI-1901
+
 public class TPO1 {
 
     public static void burbuja(int[] a) {
@@ -83,7 +86,7 @@ public class TPO1 {
         // Ubicar cada elemento en un bucket
         for (int i = 0; i < n; i++) {
             int bi = (temp[i] - minVal) / m;
-            System.out.println(buckets.size() + " n: " + n + " bi: " + bi);
+            //System.out.println(buckets.size() + " n: " + n + " bi: " + bi);
             if (bi == buckets.size()) {
                 bi--;
             }
@@ -109,7 +112,8 @@ public class TPO1 {
     }
 
     public static void main(String[] args) {
-        int[] arr = {50, 14, 30, 55, 83, 24, 5, 52, 11};
+        int[] arr = {5382,3852,8253,2385,5238,3528,8532,2835,5328,8235,3258,2538,5823,3582,8352,2358,
+            8325,5283,8523,3285,2853,2583,3825,5232};
         bucketsort(arr);
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
